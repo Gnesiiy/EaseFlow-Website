@@ -1,7 +1,7 @@
 # EaseFlow 官网中英文文案底稿
 
 > 用途：供 EaseFlow-Website 网站开发直接使用的唯一文本底稿。
-> 状态：基于已核查的 EaseFlow v1.0 功能撰写；开发者署名已确认使用 Pan XinYue，生效日期为 2026 年 10 月。正式上线前仍需确认托管服务与客服邮件实际处理规则。
+> 状态：基于已核查的 EaseFlow v1.1 代码修订，2026 年 10 月 25 日更新；v1.1 相关内容自该版本发布时适用。开发者署名已确认使用 Pan XinYue。正式上线前仍需确认托管服务与客服邮件实际处理规则。
 > 客服邮箱：easeflowsupport@163.com
 > 开发规范：保留各页面主要内容、关键安全和隐私含义；不得让网站开发工具自行编造事实、法律承诺、服务或联系方式。可以为导航、按钮、卡片做最小幅度摘录，不得更改正文含义。
 
@@ -49,7 +49,9 @@ EaseFlow makes everyday stretching simple and approachable. Explore clear exerci
 
 # EaseFlow 隐私政策
 
-**生效日期：** 2026 年 10 月
+**修订日期：** 2026 年 10 月 25 日
+
+**适用版本：** EaseFlow v1.1（自该版本发布时起）
 
 **开发者：** Pan XinYue
 
@@ -63,14 +65,20 @@ EaseFlow 尊重并重视你的隐私。
 
 ### 2. 应用内的数据处理
 
-EaseFlow 当前版本无需注册账号。
+EaseFlow v1.1 无需注册账号。
 
 应用仅在你的设备上保存以下偏好设置：
 
 - 选择的应用语言
 - 默认语音指导开关
+- 每日拉伸提醒的开关和提醒时间
+- 定时活动提醒的开关、间隔及开始和结束时间
 
-这些信息用于保存你的使用偏好，不会由应用上传至开发者服务器。
+这些信息用于保存你的使用偏好。提醒偏好保存在设备的应用设置中，不会由应用上传至开发者可访问的服务器。
+
+提醒功能默认关闭。开启每日拉伸提醒或定时活动提醒时，应用会请求 iOS 通知权限；获得授权后，应用根据你设置的时间在设备上向 iOS 提交重复的本地通知。定时活动提醒按设定的间隔和时段安排，不会实时监测你是否久坐。通知由 iOS 系统调度和送达，实际显示时间受系统通知设置影响。
+
+桌面小组件展示随应用提供的一套现有拉伸方案的名称、时长和动作数量。点击小组件会通过设备上的应用链接打开相应方案；小组件不需要读取提醒偏好。
 
 搜索、筛选、动作选择、计时与训练进度均在设备本地处理。当前版本不保存长期训练历史或个人健康档案，也不提供账号云同步功能。
 
@@ -117,7 +125,7 @@ EaseFlow 官方网站计划使用 GitHub Pages 提供静态页面。
 
 ### 7. 信息删除与管理
 
-你可以随时在应用设置中修改语言和默认语音指导偏好。
+你可以随时在应用设置中修改语言、默认语音指导和提醒偏好，包括关闭提醒或调整时间、间隔和时段。你也可以在 iOS 系统设置中管理或关闭 EaseFlow 的通知权限。
 
 卸载应用通常会从当前设备中删除应用的本地数据，但由操作系统或备份服务管理的副本可能仍然存在，具体取决于设备和备份设置。
 
@@ -129,7 +137,7 @@ EaseFlow 不维护可供远程删除的云端训练档案。
 
 随着应用功能和相关服务的发展，我们可能更新本隐私政策。
 
-更新后的版本将在官方网站公布，并标明适用的生效日期。
+更新后的版本将在官方网站公布，并标明修订日期和适用版本。
 
 ### 9. 联系我们
 
@@ -143,7 +151,9 @@ easeflowsupport@163.com
 
 # EaseFlow Privacy Policy
 
-**Effective Date:** October 2026
+**Last Updated:** October 25, 2026
+
+**Applies To:** EaseFlow v1.1 (from the release of that version)
 
 **Developer:** Pan XinYue
 
@@ -157,14 +167,20 @@ We aim to provide a simple and transparent stretching experience. This policy ex
 
 ### 2. Information Stored on Your Device
 
-EaseFlow does not require an account.
+EaseFlow v1.1 does not require an account.
 
-The current version stores only two preferences on your device:
+The app stores the following preferences on your device:
 
 - Your selected app language
 - Your default voice guidance setting
+- Whether daily stretch reminders are enabled and the time you choose
+- Whether scheduled activity reminders are enabled, their interval, and their start and end times
 
-These preferences are not uploaded to developer-operated servers.
+These settings save your preferences. Reminder preferences are stored in the app's settings on your device and are not uploaded by the app to servers accessible to the developer.
+
+Reminders are off by default. When you turn on daily stretch or scheduled activity reminders, the app requests iOS notification permission. If you allow notifications, the app submits recurring local notifications to iOS based on your chosen times. Activity reminders follow your selected interval and time window; they do not monitor whether you have been sitting. iOS schedules and delivers the notifications, and system notification settings may affect when they appear.
+
+The Home Screen widget displays the title, duration, and exercise count of an existing stretching routine bundled with the app. Tapping it opens that routine through a link handled on your device. The widget does not need access to your reminder preferences.
 
 Searches, filters, exercise selections, timers, and session progress are processed locally. The current version does not maintain a permanent workout history or personal health profile, and does not offer account-based cloud syncing.
 
@@ -211,7 +227,7 @@ Please avoid including unnecessary sensitive personal information in support mes
 
 ### 7. Managing and Deleting Information
 
-You can change your app language and default voice guidance preferences in EaseFlow settings.
+You can change your app language, default voice guidance, and reminder preferences in EaseFlow settings, including turning reminders off or changing their times, interval, and time window. You can also manage or disable EaseFlow's notification permission in iOS Settings.
 
 Uninstalling the app normally removes its local data from the device. Copies may remain in operating system backups, depending on your backup settings.
 
@@ -223,7 +239,7 @@ You may contact us to request access to or deletion of information voluntarily p
 
 We may update this Privacy Policy as EaseFlow and its related services evolve.
 
-The latest version will be published on our website with the applicable effective date.
+The latest version will be published on our website with its revision date and applicable app version.
 
 ### 9. Contact
 
@@ -241,7 +257,9 @@ easeflowsupport@163.com
 
 # EaseFlow 使用条款
 
-**生效日期：** 2026 年 10 月
+**修订日期：** 2026 年 10 月 25 日
+
+**适用版本：** EaseFlow v1.1（自该版本发布时起）
 
 欢迎使用 EaseFlow。使用本应用前，请阅读以下条款。
 
@@ -271,6 +289,8 @@ EaseFlow 提供自主训练和引导训练等功能。
 部分动作需要用户手动确认或推进步骤。应用不会实时识别你的身体姿势，也不能自动判断动作是否适合你的身体状况。
 
 请以自己的身体反馈为准，不要仅因计时结束而强迫完成动作。
+
+每日拉伸提醒和定时活动提醒是可选的健康生活提示，不提供医疗监测或实时久坐检测。你可以在应用设置中自行开启、调整或关闭提醒，也可以在 iOS 系统设置中管理通知权限。通知时间和送达可能受 iOS 系统设置影响。
 
 ### 4. 内容与知识产权
 
@@ -308,7 +328,9 @@ easeflowsupport@163.com
 
 # EaseFlow Terms of Use
 
-**Effective Date:** October 2026
+**Last Updated:** October 25, 2026
+
+**Applies To:** EaseFlow v1.1 (from the release of that version)
 
 Welcome to EaseFlow. Please read these terms before using the app.
 
@@ -338,6 +360,8 @@ EaseFlow offers self-paced and guided exercise modes.
 Some exercises require manual confirmation or step progression. The app does not monitor your posture in real time or determine whether a particular movement is suitable for you.
 
 Pay attention to how your body feels. Never force a movement simply because a timer has finished.
+
+Daily stretch and scheduled activity reminders are optional wellness prompts. They do not provide medical monitoring or detect prolonged sitting in real time. You can enable, adjust, or turn off reminders in the app, and manage notification permission in iOS Settings. iOS system settings may affect when notifications arrive or whether they are delivered.
 
 ### 4. Content and Intellectual Property
 

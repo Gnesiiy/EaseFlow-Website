@@ -94,7 +94,9 @@ def main():
             if route == 'privacy/':
                 assert 'PanXinYue' in text, name
             if route in ('privacy/', 'terms/'):
-                assert compact('October 2026' if lang == 'en' else '2026 年 10 月') in text, name
+                for fragment in (('October 25, 2026', 'EaseFlow v1.1') if lang == 'en'
+                                 else ('2026 年 10 月 25 日', 'EaseFlow v1.1')):
+                    assert compact(fragment) in text, name
             assert set(doc.switches) == {'en', 'zh-Hans'}, name
             for target_lang, href in doc.switches.items():
                 target_prefix = 'en/' if target_lang == 'en' else ''
