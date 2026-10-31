@@ -94,9 +94,14 @@ def main():
             if route == 'privacy/':
                 assert 'PanXinYue' in text, name
             if route in ('privacy/', 'terms/'):
-                for fragment in (('October 25, 2026', 'EaseFlow v1.1') if lang == 'en'
-                                 else ('2026 年 10 月 25 日', 'EaseFlow v1.1')):
+                for fragment in (('October 31, 2026', 'v1.0', 'v1.1') if lang == 'en'
+                                 else ('2026 年 10 月 31 日', 'v1.0', 'v1.1')):
                     assert compact(fragment) in text, name
+            if route in ('privacy/', 'support/'):
+                stale = ('does not store a permanent workout history',
+                         'does not maintain a permanent workout history') if lang == 'en' else (
+                    '不提供长期训练历史', '不保存长期训练历史')
+                assert not any(compact(phrase) in text for phrase in stale), name
             assert set(doc.switches) == {'en', 'zh-Hans'}, name
             for target_lang, href in doc.switches.items():
                 target_prefix = 'en/' if target_lang == 'en' else ''
