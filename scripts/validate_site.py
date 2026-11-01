@@ -1,129 +1,146 @@
 #!/usr/bin/env python3
-"""Validate the release artifact and URLs under the GitHub Pages project path.
-
-Uses only Python's standard library. No browser, server, or network is required.
-"""
+"""Validate all 36 localized release pages and GitHub Pages project URLs."""
 import argparse
 from html.parser import HTMLParser
+import json
 from pathlib import Path
 import re
 from urllib.parse import unquote, urljoin, urlsplit
 
-ROOT = Path(__file__).resolve().parents[1]
-DIST = ROOT / 'dist'
-EMAIL = 'easeflowsupport@163.com'
-PAGES = ['', 'privacy/', 'terms/', 'support/']
-ASSETS = {
-    'AppIcon-1024.png', 'brand-icon-96.png', 'apple-touch-icon.png',
-    'favicon.ico', 'favicon-16x16.png', 'favicon-32x32.png',
-    'favicon-48x48.png', 'flow.svg', 'styles.css', 'site.js',
-}
-
+ROOT=Path(__file__).resolve().parents[1]
+DIST=ROOT/'dist'
+EMAIL='easeflowsupport@163.com'
+SITE_URL='https://gnesiiy.github.io/EaseFlow-Website/'
+ROUTES={'zh-Hans':'','zh-Hant':'zh-Hant/','en-US':'en/','en-GB':'en-GB/','ja':'ja/','ko':'ko/','es':'es/','fr':'fr/','de':'de/'}
+PAGES={'home':'','privacy':'privacy/','terms':'terms/','support':'support/'}
+ASSETS={'AppIcon-1024.png','brand-icon-96.png','apple-touch-icon.png','favicon.ico','favicon-16x16.png','favicon-32x32.png','favicon-48x48.png','flow.svg','styles.css','site.js'}
 
 class Document(HTMLParser):
-    def __init__(self, text):
-        super().__init__()
-        self.links, self.ids, self.text, self.switches = [], set(), [], {}
-        self.lang, self.headings, self.icons, self.favicons = '', 0, [], []
-        self.feed(text)
-
+    def __init__(self, source):
+        super().__init__(convert_charrefs=True)
+        self.lang=None; self.title=''; self.description=''; self.headings=0
+        self.links=[]; self.ids=set(); self.text=[]; self.alternates={}; self.canonical=[]
+        self.switches={}; self.current=[]; self.icons=[]; self.favicons=[]
+        self.details=0; self.summaries=0; self.menu=False; self.menu_label=None
+        self._in_title=False; self._in_menu=False
+        self.feed(source)
     def handle_starttag(self, tag, attrs):
-        a = dict(attrs)
-        if tag == 'html':
-            self.lang = a.get('lang')
-        if tag == 'h1':
-            self.headings += 1
+        a=dict(attrs)
+        if tag=='html': self.lang=a.get('lang')
+        if tag=='title': self._in_title=True
+        if tag=='h1': self.headings+=1
+        if tag=='details':
+            if 'language-switch' in a.get('class','').split(): self.menu=True; self._in_menu=True
+            else: self.details+=1
+        if tag=='summary':
+            if self._in_menu: self.menu_label=a.get('aria-label')
+            else: self.summaries+=1
+        if tag=='meta' and a.get('name')=='description': self.description=a.get('content','')
+        if tag=='link':
+            if a.get('rel')=='alternate':
+                assert a.get('hreflang') not in self.alternates
+                self.alternates[a.get('hreflang')]=a.get('href')
+            if a.get('rel')=='canonical': self.canonical.append(a.get('href'))
+            if a.get('rel') in ('icon','apple-touch-icon'): self.favicons.append(a.get('href'))
         if 'id' in a:
-            assert a['id'] not in self.ids, f'Duplicate ID: {a["id"]}'
+            assert a['id'] not in self.ids, f'Duplicate id {a["id"]}'
             self.ids.add(a['id'])
-        for key in ('href', 'src'):
-            if key in a:
-                self.links.append(a[key])
-        if tag == 'a' and a.get('lang') in ('en', 'zh-Hans'):
-            self.switches[a['lang']] = a['href']
-        if tag == 'img' and 'brand-icon' in a.get('class', '').split():
-            self.icons.append(a['src'])
-        if tag == 'link' and a.get('rel') in ('icon', 'apple-touch-icon'):
-            self.favicons.append(a['href'])
+        for key in ('href','src'):
+            if key in a: self.links.append(a[key])
+        if tag=='a' and self._in_menu:
+            assert a.get('aria-label'), 'Missing language option label'
+            assert a.get('lang') not in self.switches
+            self.switches[a.get('lang')]=a.get('href')
+            if a.get('aria-current')=='true': self.current.append(a.get('lang'))
+        if tag=='img' and 'brand-icon' in a.get('class','').split(): self.icons.append(a.get('src'))
+    def handle_endtag(self, tag):
+        if tag=='title': self._in_title=False
+        if tag=='details' and self._in_menu: self._in_menu=False
+    def handle_data(self, value):
+        if self._in_title: self.title+=value
+        self.text.append(value)
 
-    def handle_data(self, text):
-        self.text.append(text)
-
-
-def compact(text):
-    return re.sub(r'\s+', '', text)
-
+def compact(value): return re.sub(r'\s+','',value)
+def copy_pages(lang):
+    source=(ROOT/'copy'/f'{lang}.md').read_text(encoding='utf-8')
+    parts=re.split(r'^<!-- (home|privacy|terms|support) -->\s*$',source,flags=re.M)
+    assert len(parts)==9 and not parts[0].strip(), lang
+    return {parts[i]:parts[i+1].strip() for i in range(1,len(parts),2)}
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--base-path', default='/EaseFlow-Website/')
-    args = parser.parse_args()
-    base = args.base_path
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--base-path',default='/EaseFlow-Website/')
+    args=parser.parse_args(); base=args.base_path
     assert base.startswith('/') and base.endswith('/') and '..' not in base
-    origin = 'https://gnesiiy.github.io'
-    expected = {f'{prefix}{page}index.html' for prefix in ('', 'en/') for page in PAGES}
-    expected |= {f'assets/{name}' for name in ASSETS} | {'.nojekyll'}
-    actual = {p.relative_to(DIST).as_posix() for p in DIST.rglob('*') if p.is_file()}
-    assert actual == expected, f'Unexpected/missing artifact files: {actual ^ expected}'
-    assert not any(p.is_symlink() for p in DIST.rglob('*')), 'Symlinks in artifact'
-    docs = {name: Document((DIST / name).read_text(encoding='utf-8'))
-            for name in sorted(expected) if name.endswith('.html')}
-    source = (ROOT / 'EaseFlow_Website_Copy_zh_en.md').read_text(encoding='utf-8')
-    blocks = re.split(r'^# 0[1-4] .*$', source, flags=re.M)[1:]
-    assert len(blocks) == 4
-    checked = 0
-    for index, route in enumerate(PAGES):
-        parts = re.split(r'^## (zh-Hans|en)\s*$', blocks[index], flags=re.M)
-        for lang, prefix in [('zh-Hans', ''), ('en', 'en/')]:
-            name = f'{prefix}{route}index.html'
-            doc = docs[name]
-            page_url = origin + base + prefix + route
-            assert doc.lang == lang and doc.headings == 1, name
-            assert len(doc.icons) == (3 if index == 0 else 2), name
-            assert all(x.endswith('/assets/brand-icon-96.png') for x in doc.icons), name
-            assert len(doc.favicons) == 4, name
-            text = compact(''.join(doc.text))
-            assert not re.search(r'\[[^\]]+\]|PetDrinkDiary', text), name
-            raw = parts[parts.index(lang) + 1]
-            for line in raw.splitlines():
-                if not line.strip() or line == '---':
-                    continue
-                line = re.sub(r'^(#{1,4} |- )', '', line).replace('**', '')
-                for fragment in (line.split(' — ') if index == 0 else [line]):
-                    assert compact(fragment) in text, f'Missing copy in {name}: {fragment}'
-            if route == 'privacy/':
-                assert 'PanXinYue' in text, name
-            if route in ('privacy/', 'terms/'):
-                for fragment in (('October 31, 2026', 'v1.0', 'v1.1') if lang == 'en'
-                                 else ('2026 年 10 月 31 日', 'v1.0', 'v1.1')):
-                    assert compact(fragment) in text, name
-            if route in ('privacy/', 'support/'):
-                stale = ('does not store a permanent workout history',
-                         'does not maintain a permanent workout history') if lang == 'en' else (
-                    '不提供长期训练历史', '不保存长期训练历史')
-                assert not any(compact(phrase) in text for phrase in stale), name
-            assert set(doc.switches) == {'en', 'zh-Hans'}, name
-            for target_lang, href in doc.switches.items():
-                target_prefix = 'en/' if target_lang == 'en' else ''
-                assert urljoin(page_url, href) == origin + base + target_prefix + route, name
-            assert f'mailto:{EMAIL}' in doc.links, name
+    origin='https://gnesiiy.github.io'
+    expected={f'{prefix}{route}index.html' for prefix in ROUTES.values() for route in PAGES.values()}
+    expected|={f'assets/{name}' for name in ASSETS}|{'.nojekyll'}
+    actual={p.relative_to(DIST).as_posix() for p in DIST.rglob('*') if p.is_file()}
+    assert actual==expected, f'Unexpected/missing output: {actual ^ expected}'
+    assert not any(p.is_symlink() for p in DIST.rglob('*'))
+    release=json.loads((ROOT/'copy/release.json').read_text(encoding='utf-8'))
+    assert set(release)=={'current_app_store_version','next_version','next_version_released'}
+    assert all(re.fullmatch(r'v\d+\.\d+',release[k]) for k in ('current_app_store_version','next_version'))
+    assert release['current_app_store_version']!=release['next_version'] and isinstance(release['next_version_released'],bool)
+    docs={name:Document((DIST/name).read_text(encoding='utf-8')) for name in sorted(expected) if name.endswith('.html')}
+    checked=0
+    for lang,prefix in ROUTES.items():
+        source=copy_pages(lang)
+        assert set(source)==set(PAGES)
+        assert [len(re.findall(r'^### ',source[s],re.M)) for s in PAGES]==[0,9,8,3], lang
+        assert len(re.findall(r'^#### ',source['support'],re.M))==12, lang
+        for slug,route in PAGES.items():
+            name=f'{prefix}{route}index.html'; doc=docs[name]
+            page_url=origin+base+prefix+route
+            published=SITE_URL+prefix+route
+            assert doc.lang==lang and doc.headings==1 and doc.title.endswith(' · EaseFlow'), name
+            if slug!='home': assert doc.title.startswith(source[slug].splitlines()[0][2:]), name
+            assert len(doc.description)>len(doc.title) and '{{' not in doc.description, name
+            assert doc.canonical==[published], name
+            assert doc.menu and doc.menu_label and doc.current==[lang], name
+            assert len(doc.icons)==(3 if slug=='home' else 2) and all(x.endswith('/assets/brand-icon-96.png') for x in doc.icons),name
+            assert len(doc.favicons)==4, name
+            assert set(doc.alternates)==set(ROUTES)|{'x-default'}, name
+            assert set(doc.switches)==set(ROUTES), name
+            for target_lang,target_prefix in ROUTES.items():
+                target=SITE_URL+target_prefix+route
+                assert doc.alternates[target_lang]==target, (name,target_lang)
+                assert urljoin(page_url,doc.switches[target_lang])==origin+base+target_prefix+route,(name,target_lang)
+            assert doc.alternates['x-default']==SITE_URL+route,name
+            if slug=='support': assert doc.details==doc.summaries==12,name
+            else: assert doc.details==doc.summaries==0,name
+            text=compact(''.join(doc.text))
+            assert not re.search(r'\{\{[^}]+\}\}|PetDrinkDiary',text),name
+            for line in source[slug].splitlines():
+                if not line.strip() or line.startswith('<!--'): continue
+                line=re.sub(r'^(?:#{1,4}\s+|-\s+)','',line).replace('**','').replace('{{release_note}}','').strip()
+                if not line: continue
+                fragments=line.split(' — ') if slug=='home' else [line]
+                for fragment in fragments:
+                    assert compact(fragment) in text, f'Missing localized copy in {name}: {fragment}'
+            if slug!='home':
+                assert release['next_version'] in text and (release['next_version_released'] or release['current_app_store_version'] in text), name
+            if slug=='privacy': assert 'PanXinYue' in text,name
+            assert f'mailto:{EMAIL}' in doc.links,name
+            local_targets=set()
             for href in doc.links:
                 if href.startswith('mailto:'):
-                    assert href == f'mailto:{EMAIL}', name
+                    assert href==f'mailto:{EMAIL}',(name,href)
                     continue
-                assert not urlsplit(href).scheme and not href.startswith('/'), (name, href)
-                target = urlsplit(urljoin(page_url, href))
-                assert target.netloc == 'gnesiiy.github.io' and target.path.startswith(base), (name, href)
-                relative = unquote(target.path[len(base):])
-                if relative.endswith('/') or not relative:
-                    relative += 'index.html'
-                assert relative in expected, (name, href)
-                if target.fragment:
-                    assert relative in docs and unquote(target.fragment) in docs[relative].ids, (name, href)
-                checked += 1
-    print(f'PASS: 8 bilingual pages; approved copy, language URLs, icons and email verified.')
-    print(f'PASS: {checked} links/assets/anchors under {base}; {len(actual)} release files, no extra artifacts.')
+                if href.startswith(SITE_URL):
+                    assert href in doc.alternates.values() or href in doc.canonical,(name,href)
+                    continue
+                assert not urlsplit(href).scheme and not href.startswith('/'),(name,href)
+                target=urlsplit(urljoin(page_url,href))
+                assert target.netloc=='gnesiiy.github.io' and target.path.startswith(base),(name,href)
+                relative=unquote(target.path[len(base):])
+                if not relative or relative.endswith('/'): relative+='index.html'
+                assert relative in expected,(name,href)
+                if target.fragment: assert relative in docs and unquote(target.fragment) in docs[relative].ids,(name,href)
+                local_targets.add(relative); checked+=1
+            assert {f'{prefix}{r}index.html' for r in PAGES.values()} <= local_targets,name
+    assert copy_pages('en-US')!=copy_pages('en-GB'),'English locales must be maintained independently'
+    print('PASS: 36 pages, 9 complete locale sources, 12 FAQ entries per language, release status and email.')
+    print(f'PASS: language menus, current-page switching, canonical/hreflang, copy, and {checked} local links/assets/anchors under {base}.')
 
-
-if __name__ == '__main__':
-    main()
+if __name__=='__main__': main()

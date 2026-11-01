@@ -7,3 +7,24 @@
 @media(max-width:650px){html[lang=zh-Hans] .hero h1{font-size:clamp(32px,10vw,41px)}}
 
 .brand-icon{display:block;object-fit:contain;flex-shrink:0}
+
+/* Compact, keyboard-operable language menu for all nine locales. */
+.language-switch{position:relative;display:block;padding:0;background:transparent;border-radius:0;flex-shrink:0;font-size:12px}
+.language-switch summary{min-height:38px;display:flex;align-items:center;gap:7px;padding:5px 10px;border:1px solid var(--line);border-radius:20px;background:#e8edeb;color:var(--ink);cursor:pointer;white-space:nowrap;list-style:none}
+.language-switch summary::-webkit-details-marker{display:none}
+.language-switch summary:hover,.language-switch[open] summary{background:#e0e9e7}
+.language-glyph{font-size:12px;color:var(--blue);font-weight:650}
+.language-chevron{font-size:16px;line-height:1;color:var(--blue)}
+.language-switch[open] .language-chevron{transform:rotate(180deg)}
+.language-options{position:absolute;top:calc(100% + 7px);right:0;z-index:20;min-width:180px;max-height:min(65vh,430px);overflow-y:auto;display:grid;gap:2px;padding:7px;border:1px solid var(--line);border-radius:14px;background:var(--white);box-shadow:0 14px 30px #30495120}
+.language-switch .language-options a{min-height:34px;display:flex;align-items:center;justify-content:flex-start;padding:7px 12px;border-radius:8px;color:var(--ink);white-space:nowrap}
+.language-switch .language-options a:hover,.language-switch .language-options a:focus-visible{background:#e8eeed}
+.language-switch .language-options a[aria-current]{background:#e8eeed;color:var(--blue);font-weight:650}
+@media(max-width:1050px){.header-inner{flex-wrap:wrap;gap:0;padding-top:14px;padding-bottom:8px}.language-switch{margin-left:auto}.primary-nav{order:3;width:100%;margin:9px 0 0;display:flex;flex-wrap:wrap;justify-content:flex-start;gap:2px 22px}.primary-nav a{padding:10px 0}}
+@media(max-width:650px){.header-inner{padding-top:14px;padding-bottom:8px}.primary-nav{justify-content:space-between;gap:0 12px}.primary-nav a{overflow-wrap:anywhere}.footer-inner nav{flex-wrap:wrap;justify-content:flex-start;gap:10px 18px}.footer-inner nav a{overflow-wrap:anywhere}.entry-card h3{overflow-wrap:anywhere}.hero h1{overflow-wrap:anywhere}.language-options{min-width:180px}.home-contact{min-width:0;flex-wrap:wrap}.home-contact p{min-width:0;overflow-wrap:anywhere}html[lang=zh-Hant] .hero h1{font-size:clamp(32px,10vw,41px)}}
+.page-intro h1{overflow-wrap:anywhere}
+.language-switch summary span{font-size:inherit;font-weight:inherit;flex-shrink:initial;transform:none}
+.language-switch summary .language-glyph{font-size:12px;font-weight:650}
+.language-switch summary .language-chevron{font-size:16px;flex-shrink:0}
+.language-switch[open] summary span{transform:none}
+.language-switch[open] summary .language-chevron{transform:rotate(180deg)}

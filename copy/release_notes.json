@@ -1,0 +1,56 @@
+{
+  "zh-Hans": [
+    "当前上架版本为 {current}；以下 {next} 功能及数据处理说明自 {next} 正式发布时适用。",
+    "当前上架版本为 {current}；以下提及的 {next} 功能自 {next} 正式发布时适用。",
+    "App Store 当前上架版本为 {current}。以下 {next} 功能指引在 {next} 正式发布后适用。",
+    "App Store 当前上架版本为 {next}。"
+  ],
+  "zh-Hant": [
+    "App Store 目前上架版本為 {current}；以下 {next} 功能及資料處理說明自 {next} 正式發布時適用。",
+    "App Store 目前上架版本為 {current}；以下提及的 {next} 功能自 {next} 正式發布時適用。",
+    "App Store 目前上架版本為 {current}。以下 {next} 功能指引在 {next} 正式發布後適用。",
+    "App Store 目前上架版本為 {next}。"
+  ],
+  "en-US": [
+    "{current} is currently available on the App Store. The {next} features and data practices described below apply when {next} is released.",
+    "{current} is currently available on the App Store. The {next} features mentioned below apply when {next} is released.",
+    "{current} is currently available on the App Store. The {next} guidance below applies after {next} is released.",
+    "{next} is currently available on the App Store."
+  ],
+  "en-GB": [
+    "{current} is currently available on the App Store. The {next} features and data practices described below apply when {next} is released.",
+    "{current} is currently available on the App Store. The {next} features mentioned below apply when {next} is released.",
+    "{current} is currently available on the App Store. The {next} guidance below applies after {next} is released.",
+    "{next} is currently available on the App Store."
+  ],
+  "ja": [
+    "App Storeで現在公開中なのは{current}です。以下の{next}の機能とデータ処理は、{next}の正式公開後に適用されます。",
+    "App Storeで現在公開中なのは{current}です。以下の{next}の機能は、{next}の正式公開後に適用されます。",
+    "App Storeで現在公開中なのは{current}です。以下の{next}の案内は、{next}の正式公開後に適用されます。",
+    "App Storeで現在公開中なのは{next}です。"
+  ],
+  "ko": [
+    "현재 App Store에 제공되는 버전은 {current}입니다. 아래 {next} 기능과 데이터 처리 설명은 {next} 정식 출시 후 적용됩니다.",
+    "현재 App Store에 제공되는 버전은 {current}입니다. 아래 {next} 기능은 {next} 정식 출시 후 적용됩니다.",
+    "현재 App Store에 제공되는 버전은 {current}입니다. 아래 {next} 안내는 {next} 정식 출시 후 적용됩니다.",
+    "현재 App Store에 제공되는 버전은 {next}입니다."
+  ],
+  "es": [
+    "La versión disponible actualmente en la App Store es {current}. Las funciones y prácticas de datos de {next} descritas a continuación se aplicarán cuando se publique {next}.",
+    "La versión disponible actualmente en la App Store es {current}. Las funciones de {next} mencionadas a continuación se aplicarán cuando se publique {next}.",
+    "La versión disponible actualmente en la App Store es {current}. Las indicaciones de {next} que siguen se aplicarán tras su publicación.",
+    "La versión disponible actualmente en la App Store es {next}."
+  ],
+  "fr": [
+    "La version actuellement disponible sur l’App Store est {current}. Les fonctions et traitements de données de {next} décrits ci-dessous s’appliqueront lors de sa sortie.",
+    "La version actuellement disponible sur l’App Store est {current}. Les fonctions de {next} mentionnées ci-dessous s’appliqueront lors de sa sortie.",
+    "La version actuellement disponible sur l’App Store est {current}. Les indications relatives à {next} ci-dessous s’appliqueront après sa sortie.",
+    "La version actuellement disponible sur l’App Store est {next}."
+  ],
+  "de": [
+    "Im App Store ist derzeit {current} verfügbar. Die nachfolgend beschriebenen Funktionen und Datenverarbeitungen von {next} gelten ab der Veröffentlichung von {next}.",
+    "Im App Store ist derzeit {current} verfügbar. Die nachfolgend genannten Funktionen von {next} gelten ab der Veröffentlichung von {next}.",
+    "Im App Store ist derzeit {current} verfügbar. Die folgenden Hinweise zu {next} gelten nach der Veröffentlichung von {next}.",
+    "Im App Store ist derzeit {next} verfügbar."
+  ]
+}

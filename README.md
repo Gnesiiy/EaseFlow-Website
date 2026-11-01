@@ -1,87 +1,40 @@
 # EaseFlow 官方网站
 
-暖白与雾蓝灰的轻量静态网站，包含 Home、Privacy Policy、Terms of Use、Help & Support 的简体中文和英文版本。
+官网是无依赖的静态网站。四类页面（首页、隐私政策、使用条款、帮助与支持）各有九种完整语言，共 36 个 `index.html` 页面。保留简中根路径和原有 `/en/` 路径；`/en/` 对应 en-US，en-GB 独立位于 `/en-GB/`。
 
-## 本地预览
+| 语言 | 前缀 |
+| --- | --- |
+| zh-Hans | `/` |
+| zh-Hant | `/zh-Hant/` |
+| en-US | `/en/` |
+| en-GB | `/en-GB/` |
+| ja | `/ja/` |
+| ko | `/ko/` |
+| es | `/es/` |
+| fr | `/fr/` |
+| de | `/de/` |
 
-在终端运行（Python 3.9 或更高版本，无需安装依赖）：
+每个前缀下还有 `privacy/`、`terms/`、`support/`。站内链接使用相对地址，支持 GitHub Pages 的 `/EaseFlow-Website/` 项目前缀；页面提供对应的 `lang`、标题、描述、canonical 和九语言 `hreflang`，以及 `x-default`。原生 `<details>` 语言菜单可用键盘操作，切换时保留当前页面及章节锚点；FAQ 也使用原生 `<details>`。
+
+## 文案维护
+
+- `copy/<locale>.md`：每种语言独立的四页正文。段落以 `<!-- home -->`、`<!-- privacy -->`、`<!-- terms -->`、`<!-- support -->` 分隔。此目录是四页正文的唯一正式来源；法律、隐私、安全、备份和删除陈述须保留已确认的原意，并与 iOS 术语核对。
+- `copy/release.json`：唯一的版本发布状态。当前 v1.0 已上架，v1.1 尚未正式发布。正式发布时须核实产品状态，再更新此文件并重新构建、校验。
+- `copy/release_notes.json`：隐私、条款和帮助页的九语言版本提示模板，由构建脚本按统一状态填入。
+- 原有双语底稿已与 `copy/zh-Hans.md`、`copy/en-US.md` 核对；历史版本可从 Git 记录查阅，不需维护第二套正文。
+
+翻译需人工审校，尤其是各语言的法律用语、iOS 具体控件名称、en-US 与 en-GB 的地区写法。不得据此自行增加数据处理、医疗或服务承诺。
+
+## 构建与校验
+
+使用 Python 3.9 或更新版本，不需要安装依赖：
 
 ```sh
-cd EaseFlow-Website
 python3 scripts/build.py
 python3 scripts/validate_site.py --base-path /EaseFlow-Website/
 python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 ```
 
-打开 http://127.0.0.1:4173/ 。按 Ctrl+C 停止服务器。页面已生成，未改文案或样式时可以省略构建命令。
+在本地打开 `http://127.0.0.1:4173/`。`dist/` 是可重建的输出，不应手工编辑或提交。现有 `.github/workflows/pages.yml` 在 `main` Push 后运行构建与校验，再发布 `dist/`；提交后仍需单独 Push 才会触发发布。
 
-| 页面 | 简体中文 | English |
-| --- | --- | --- |
-| 首页 | `/` | `/en/` |
-| 隐私政策 | `/privacy/` | `/en/privacy/` |
-| 使用条款 | `/terms/` | `/en/terms/` |
-| 帮助与支持 | `/support/` | `/en/support/` |
-
-## 文案与代码
-
-- `EaseFlow_Website_Copy_zh_en.md`：唯一正文来源；中英文 v1.1 文案、修订日期及适用版本说明均以此文件为准。
-- `scripts/build.py`：清理旧构建产物后，从底稿生成八个静态 HTML 页面。
-- `scripts/validate_site.py`：发布检查，核对正文、语言链接、图标、邮箱、锚点及项目子路径。
-- `.github/workflows/pages.yml`：在 `main` 分支收到 Push 后构建、检查并发布，也支持手动触发。
-- `assets/`：本地 CSS、SVG 插画、网站图标与少量增强脚本。
-- `dist/`：完整网站输出，只需静态文件服务器；不提交，由 Actions 重新生成。
-- `screenshots/`：仅本地保留的历史截图与检查记录，不提交、不部署。
-
-修改正式正文时，修改底稿后重新运行构建脚本。不要直接修改 `dist/`，再次构建会覆盖生成文件。Markdown 解析器仅支持当前底稿使用的标题、段落、粗体和列表格式。
-
-每个地址均对应实际 `index.html` 文件；页面、资源和导航使用相对路径，不依赖 SPA 回退。语言编码在 URL 中，站内导航保留语言，切换语言保留当前页面和章节锚点。无 cookie、localStorage、远程字体、外部脚本、后台、追踪或第三方分析服务；JavaScript 仅用于切换语言时保留章节锚点，正文、导航、语言切换和 FAQ 本身使用原生 HTML。
-
-## GitHub Pages 兼容性
-
-网站由 GitHub Pages 托管，仓库为 `Gnesiiy/EaseFlow-Website`，实际地址：https://gnesiiy.github.io/EaseFlow-Website/ 。2026 年 10 月 31 日核验该地址返回 HTTP 200，响应头为 `server: GitHub.com`；仓库 Pages 已启用，最近一次 Pages 工作流成功。
-
-工作流使用 Ubuntu 与 Python 3.12，无需 npm 或 pip 安装。构建执行 `python scripts/build.py`，检查执行 `python scripts/validate_site.py --base-path /EaseFlow-Website/`；通过后仅上传 `dist/`（包括 `.nojekyll`），发布到 `github-pages` 环境。只有 `main` 分支能够部署，部署任务依赖构建成功，使用 GitHub 自动提供的 `GITHUB_TOKEN`，无需额外部署密钥。
-
-资源和页面链接均为相对路径，兼容域名根路径与 `/EaseFlow-Website/` 项目子路径。四页中文地址为项目根目录、`privacy/`、`terms/`、`support/`；英文位于对应的 `en/` 路径。无需 SPA 回退、`gh-pages` 分支或复制文件到 `docs/`。
-
-后续发布由仓库所有者将审核通过的变更 Push 到 `main` 后，检查 **Actions → Deploy EaseFlow to GitHub Pages** 的构建与部署结果，再打开网站核对四页和语言切换。本轮不 Push，也不触发发布。
-
-如果仓库的 Actions 被禁用，先启用；若 `github-pages` 环境配置了人工审批，按 GitHub 的提示批准该次部署。实际线上部署结果须在 Push 后确认。
-
-配置依据：[GitHub Pages 自定义工作流官方文档](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
-
-子路径复查方式：在工作区运行 `python3 -m http.server 4174 --bind 127.0.0.1`，打开 http://127.0.0.1:4174/dist/ 。`/dist/` 在此模拟项目名前缀；实际 GitHub Pages 项目前缀不必叫 `dist`。
-
-## 历史验收记录
-
-- 实际浏览器检查四页 × 两种语言；逐行归一化空白后比对源文案，未发现正文遗漏。
-- 检查 320、390、768、1440 像素视口，所有页面无横向溢出。
-- 实际点击三个首页入口、语言切换、返回首页、英文导航、章节目录、返回顶部。
-- 切换语言后页面与章节保持；在项目子路径下验证上述流程。
-- FAQ 鼠标展开、键盘 Enter 收起通过。
-- 正式图标接入后校验 238 个本地资源／链接／锚点目标，均有效；八页均只有一个 H1。
-- 邮箱链接均为 `mailto:easeflowsupport@163.com`。未发测试邮件；开发者已人工确认客服邮箱可正常收发、查找及删除邮件。
-- 截图使用浏览器渲染；视口模拟不等同于实机 iOS Safari 或 Android 浏览器测试。尚未进行实机测试。
-
-## 已确认事项与发布前检查
-
-1. 已确认：隐私政策及使用条款修订日期为 `2026 年 10 月 31 日` / `October 31, 2026`；v1.1 功能说明自 v1.1 正式发布时适用。
-2. 已确认：开发者署名为 `Pan XinYue`，客服邮箱为 `easeflowsupport@163.com`。
-3. 已核实官网由 GitHub Pages 托管，地址为 `https://gnesiiy.github.io/EaseFlow-Website/`；本轮 v1.1 更新尚未发布。
-4. 开发者本人管理客服邮箱，已人工确认可正常收发、查找及删除邮件，并能处理用户反馈和合理的个人信息删除请求；不承诺固定保留期限或服务商备份立即彻底删除。
-5. 已完成正式 App Icon 接入：源文件为 `assets/AppIcon-1024.png`。导航栏、页脚、首页小标识均使用其等比缩小版本；旧品牌 SVG 与旧 Favicon 已移除。原图文件及配色未修改。
-
-最新图标验收截图与浏览器检查记录在 `screenshots/official-icon/`；旧截图保留作为历史设计记录，不代表当前发布内容。
-
-## 正式品牌图标与 Favicon
-
-普通构建仍为 `python3 scripts/build.py`，无需额外依赖。图标衍生资源已生成并存放在 `assets/`，构建时一起复制到 `dist/assets/`。
-
-- `brand-icon-96.png`：全站品牌图标，桌面导航显示 37px，手机导航显示 32px，沿用原有占位尺寸。
-- `favicon-16x16.png`、`favicon-32x32.png`、`favicon-48x48.png`：浏览器图标尺寸。
-- `favicon.ico`：包含 16、32、48px 三个图像。
-- `apple-touch-icon.png`：180px Apple Touch Icon。
-
-如需从正式原图重新生成，在 macOS 运行 `python3 scripts/generate_icons.py`，然后运行构建命令。该脚本使用系统 `sips` 等比缩小，不重绘、不裁切、不改色；ICO 直接封装生成的 PNG。其他系统可使用已经生成的资源进行普通构建。
-
-接入正式图标时检查四页双语在 320、390、1440px 视口下的图标加载与布局，并在 390、1440px 下逐页操作语言切换和返回首页；使用 `/dist/` 模拟 GitHub Pages 项目前缀。所有页面无破图、无横向溢出，图标与 Favicon 均使用相对路径。原图与正式底稿哈希、全部页面文字在变更前后完全一致。尚未进行手机实机或线上 GitHub Pages 验证。
+`scripts/validate_site.py` 检查 36 页、九语言正文、FAQ 数量、版本提示、邮箱、图标、全部链接与锚点、语言菜单、canonical 和 hreflang。可用 `--base-path /dist/` 在本地模拟项目子路径。浏览器截图及视口检查记录放在忽略提交的 `screenshots/l10n-2026-11-01/`。
