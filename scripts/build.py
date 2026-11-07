@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Build the nine-language static site from copy/*.md and copy/release*.json."""
+"""Build the nine-language static site from copy/*.md."""
 from pathlib import Path
 import html
-import json
 import re
 import shutil
 
@@ -32,24 +31,6 @@ UI = {
     'fr': (['Accueil','Politique de confidentialité','Conditions d’utilisation','Aide et assistance'], 'Retour à l’accueil','Retour en haut','Sur cette page','Aller au contenu','Navigation principale','Navigation de pied de page','Langue du site','Choisir la langue du site'),
     'de': (['Start','Datenschutzrichtlinie','Nutzungsbedingungen','Hilfe & Support'], 'Zur Startseite','Nach oben','Auf dieser Seite','Zum Inhalt springen','Hauptnavigation','Fußnavigation','Website-Sprache','Website-Sprache wählen'),
 }
-# One release state controls every rendered version notice. Templates retain each
-# locale's and page's precise scope; no page hard-codes the publication status.
-RELEASE_NOTES = json.loads((ROOT / 'copy/release_notes.json').read_text(encoding='utf-8'))
-assert set(RELEASE_NOTES) == set(ROUTES) and all(len(value) == 4 for value in RELEASE_NOTES.values())
-RELEASE = json.loads((ROOT / 'copy/release.json').read_text(encoding='utf-8'))
-assert set(RELEASE) == {'current_app_store_version','upcoming_version'}
-assert re.fullmatch(r'v\d+\.\d+', RELEASE['current_app_store_version'])
-assert RELEASE['upcoming_version'] is None or (
-    re.fullmatch(r'v\d+\.\d+', RELEASE['upcoming_version'])
-    and RELEASE['upcoming_version'] != RELEASE['current_app_store_version']
-)
-
-def release_note(lang, slug):
-    templates = RELEASE_NOTES[lang]
-    upcoming = RELEASE['upcoming_version']
-    template = templates[{'privacy':0,'terms':1,'support':2}[slug]] if upcoming else templates[3]
-    return template.format(current=RELEASE['current_app_store_version'], next=upcoming)
-
 def load_copy(lang):
     source = (ROOT / 'copy' / f'{lang}.md').read_text(encoding='utf-8')
     parts = re.split(r'^<!-- (home|privacy|terms|support) -->\s*$', source, flags=re.M)
@@ -58,8 +39,7 @@ def load_copy(lang):
     assert tuple(pages) == SLUGS and all(pages.values()), lang
     for slug in SLUGS:
         assert pages[slug].startswith('# EaseFlow') or pages[slug].startswith('# '), (lang,slug)
-        assert pages[slug].count('{{release_note}}') == (0 if slug == 'home' else 1), (lang,slug)
-        if slug != 'home': pages[slug] = pages[slug].replace('{{release_note}}', release_note(lang,slug))
+        assert not re.search(r'\{\{[^}]+\}\}', pages[slug]), (lang,slug)
     return pages
 COPY = {lang: load_copy(lang) for lang in ROUTES}
 

@@ -18,8 +18,6 @@ EaseFlow est une application d’étirements simple et douce. Des illustrations 
 
 **Date de révision :** novembre 2026
 
-**Versions concernées :** {{release_note}}
-
 **Développeur :** Pan XinYue
 
 **Contact :** easeflowsupport@163.com
@@ -32,7 +30,7 @@ Nous souhaitons proposer une expérience d’étirement simple et transparente. 
 
 ### 2. Informations traitées sur l’appareil
 
-EaseFlow v1.1 ne nécessite pas de compte. L’application conserve et traite sur votre appareil :
+EaseFlow ne nécessite pas de compte. L’application conserve et traite sur votre appareil :
 
 - Les identifiants des exercices et des routines ajoutés aux favoris.
 - Les séances terminées : heure de fin, identifiant de l’exercice ou de la routine, mode de séance, copie du titre au moment de la séance et durée d’activité réelle.
@@ -48,7 +46,7 @@ Les séances sont conservées dans des fichiers locaux de l’application ; les 
 
 ### 3. Collecte et partage des données
 
-EaseFlow v1.1 :
+EaseFlow :
 
 - N’intègre aucun SDK publicitaire, de suivi des utilisateurs ou d’analyse tiers.
 - N’envoie pas ces données locales aux serveurs du développeur via les fonctions de séances, favoris, suivi, widgets ou rappels.
@@ -107,7 +105,7 @@ Contactez-nous pour demander l’accès aux informations fournies volontairement
 
 Nous pouvons modifier cette politique à mesure que l’application et les services associés évoluent.
 
-La version mise à jour sera publiée sur le site officiel avec sa date de révision et la version de l’application concernée.
+La politique mise à jour sera publiée sur le site officiel avec sa date de révision.
 
 ### 9. Contact
 
@@ -121,8 +119,6 @@ easeflowsupport@163.com
 # Conditions d’utilisation d’EaseFlow
 
 **Date de révision :** novembre 2026
-
-**Versions concernées :** {{release_note}}
 
 Bienvenue sur EaseFlow. Veuillez lire ces conditions avant d’utiliser l’application.
 
@@ -195,8 +191,6 @@ easeflowsupport@163.com
 Pour poser une question, signaler un problème ou faire une suggestion, contactez-nous.
 
 **E-mail : easeflowsupport@163.com**
-
-**Note sur les versions :** {{release_note}}
 
 ### Questions fréquentes
 

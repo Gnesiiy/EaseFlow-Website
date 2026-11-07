@@ -19,8 +19,6 @@
 ## 文案维护
 
 - `copy/<locale>.md`：每种语言独立的四页正文。段落以 `<!-- home -->`、`<!-- privacy -->`、`<!-- terms -->`、`<!-- support -->` 分隔。此目录是四页正文的唯一正式来源；法律、隐私、安全、备份和删除陈述须保留已确认的原意，并与 iOS 术语核对。
-- `copy/release.json`：唯一的版本发布状态。当前上架版本为 v1.1（Build 4）；尚无配置中的下一上架版本。正式发布时须核实产品状态，再更新此文件并重新构建、校验。
-- `copy/release_notes.json`：隐私、条款和帮助页的九语言版本提示模板，由构建脚本按统一状态填入。
 - 原有双语底稿已与 `copy/zh-Hans.md`、`copy/en-US.md` 核对；历史版本可从 Git 记录查阅，不需维护第二套正文。
 
 翻译需人工审校，尤其是各语言的法律用语、iOS 具体控件名称、en-US 与 en-GB 的地区写法。不得据此自行增加数据处理、医疗或服务承诺。
@@ -37,4 +35,4 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory dist
 
 在本地打开 `http://127.0.0.1:4173/`。`dist/` 是可重建的输出，不应手工编辑或提交。现有 `.github/workflows/pages.yml` 在 `main` Push 后运行构建与校验，再发布 `dist/`；提交后仍需单独 Push 才会触发发布。
 
-`scripts/validate_site.py` 检查 36 页、九语言正文、FAQ 数量、版本提示、邮箱、图标、全部链接与锚点、语言菜单、canonical 和 hreflang。可用 `--base-path /dist/` 在本地模拟项目子路径。浏览器截图及视口检查记录放在忽略提交的 `screenshots/l10n-2026-11-01/`。
+`scripts/validate_site.py` 检查 36 页、九语言正文、FAQ 数量、邮箱、图标、全部链接与锚点、语言菜单、canonical 和 hreflang。可用 `--base-path /dist/` 在本地模拟项目子路径。浏览器截图及视口检查记录放在忽略提交的 `screenshots/l10n-2026-11-01/`。

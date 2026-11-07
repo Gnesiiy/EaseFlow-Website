@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Validate all 36 localized release pages and GitHub Pages project URLs."""
+"""Validate all 36 localized pages and GitHub Pages project URLs."""
 import argparse
 from html.parser import HTMLParser
-import json
 from pathlib import Path
 import re
 from urllib.parse import unquote, urljoin, urlsplit
@@ -78,13 +77,6 @@ def main():
     actual={p.relative_to(DIST).as_posix() for p in DIST.rglob('*') if p.is_file()}
     assert actual==expected, f'Unexpected/missing output: {actual ^ expected}'
     assert not any(p.is_symlink() for p in DIST.rglob('*'))
-    release=json.loads((ROOT/'copy/release.json').read_text(encoding='utf-8'))
-    assert set(release)=={'current_app_store_version','upcoming_version'}
-    assert re.fullmatch(r'v\d+\.\d+',release['current_app_store_version'])
-    assert release['upcoming_version'] is None or (
-        re.fullmatch(r'v\d+\.\d+',release['upcoming_version'])
-        and release['upcoming_version']!=release['current_app_store_version']
-    )
     docs={name:Document((DIST/name).read_text(encoding='utf-8')) for name in sorted(expected) if name.endswith('.html')}
     checked=0
     for lang,prefix in ROUTES.items():
@@ -116,15 +108,11 @@ def main():
             assert not re.search(r'\{\{[^}]+\}\}|PetDrinkDiary',text),name
             for line in source[slug].splitlines():
                 if not line.strip() or line.startswith('<!--'): continue
-                line=re.sub(r'^(?:#{1,4}\s+|-\s+)','',line).replace('**','').replace('{{release_note}}','').strip()
+                line=re.sub(r'^(?:#{1,4}\s+|-\s+)','',line).replace('**','').strip()
                 if not line: continue
                 fragments=line.split(' — ') if slug=='home' else [line]
                 for fragment in fragments:
                     assert compact(fragment) in text, f'Missing localized copy in {name}: {fragment}'
-            if slug!='home':
-                assert release['current_app_store_version'] in text, name
-                if release['upcoming_version'] is not None:
-                    assert release['upcoming_version'] in text, name
             if slug=='privacy': assert 'PanXinYue' in text,name
             assert f'mailto:{EMAIL}' in doc.links,name
             local_targets=set()
@@ -145,7 +133,7 @@ def main():
                 local_targets.add(relative); checked+=1
             assert {f'{prefix}{r}index.html' for r in PAGES.values()} <= local_targets,name
     assert copy_pages('en-US')!=copy_pages('en-GB'),'English locales must be maintained independently'
-    print('PASS: 36 pages, 9 complete locale sources, 12 FAQ entries per language, release status and email.')
+    print('PASS: 36 pages, 9 complete locale sources, 12 FAQ entries per language, and email.')
     print(f'PASS: language menus, current-page switching, canonical/hreflang, copy, and {checked} local links/assets/anchors under {base}.')
 
 if __name__=='__main__': main()

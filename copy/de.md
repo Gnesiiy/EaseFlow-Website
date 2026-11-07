@@ -18,8 +18,6 @@ EaseFlow ist eine einfache App für sanftes Dehnen. Klare Übungsbilder, Schritt
 
 **Überarbeitet am:** November 2026
 
-**Geltende Versionen:** {{release_note}}
-
 **Entwickler:** Pan XinYue
 
 **Kontakt:** easeflowsupport@163.com
@@ -32,7 +30,7 @@ Wir möchten ein einfaches und transparentes Dehnerlebnis anbieten. Diese Richtl
 
 ### 2. Verarbeitung auf deinem Gerät
 
-Für EaseFlow v1.1 ist kein Konto erforderlich. Die App speichert und verarbeitet auf deinem Gerät:
+Für EaseFlow ist kein Konto erforderlich. Die App speichert und verarbeitet auf deinem Gerät:
 
 - Kennungen der Übungen und Routinen, die du als Favoriten markierst.
 - Aufzeichnungen abgeschlossener Trainingseinheiten mit Abschlusszeit, Übungs- oder Routinenkennung, Trainingsmodus, einer Momentaufnahme des Titels und tatsächlicher aktiver Dauer.
@@ -48,7 +46,7 @@ Trainingseinheiten werden in lokalen App-Dateien gespeichert, Favoriten und Eins
 
 ### 3. Datenerhebung und Weitergabe
 
-EaseFlow v1.1:
+EaseFlow:
 
 - Enthält keine Werbe-, Nutzertracking- oder Analyse-SDKs Dritter.
 - Lädt diese lokalen Daten über Trainings-, Favoriten-, Verlaufs-, Widget- oder Erinnerungsfunktionen nicht auf Server des Entwicklers hoch.
@@ -107,7 +105,7 @@ Für Auskunft oder Löschung von Informationen, die du freiwillig in Support-E-M
 
 Wir können diese Richtlinie aktualisieren, wenn sich die App und zugehörige Dienste weiterentwickeln.
 
-Die aktualisierte Fassung wird mit Überarbeitungsdatum und geltender App-Version auf der offiziellen Website veröffentlicht.
+Die aktualisierte Richtlinie wird mit Überarbeitungsdatum auf der offiziellen Website veröffentlicht.
 
 ### 9. Kontakt
 
@@ -121,8 +119,6 @@ easeflowsupport@163.com
 # Nutzungsbedingungen von EaseFlow
 
 **Überarbeitet am:** November 2026
-
-**Geltende Versionen:** {{release_note}}
 
 Willkommen bei EaseFlow. Bitte lies diese Bedingungen vor der Nutzung der App.
 
@@ -195,8 +191,6 @@ easeflowsupport@163.com
 Bei Fragen, Problemen oder Anregungen kannst du uns gern schreiben.
 
 **E-Mail: easeflowsupport@163.com**
-
-**Versionshinweis:** {{release_note}}
 
 ### Häufige Fragen
 

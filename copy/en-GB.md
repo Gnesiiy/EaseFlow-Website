@@ -19,8 +19,6 @@ EaseFlow makes everyday stretching simple and approachable. Explore clear exerci
 
 **Last Updated:** November 2026
 
-**Applies To:** {{release_note}}
-
 **Developer:** Pan XinYue
 
 **Contact:** easeflowsupport@163.com
@@ -33,7 +31,7 @@ We aim to provide a simple and transparent stretching experience. This policy ex
 
 ### 2. Information Stored on Your Device
 
-EaseFlow v1.1 does not require an account. The app stores and processes the following on your device:
+EaseFlow does not require an account. The app stores and processes the following on your device:
 
 - Identifiers of exercises and routines you have saved as favourites;
 - Completed session records, including completion time, exercise or routine identifier, session mode, a snapshot of its title, and actual active duration;
@@ -49,7 +47,7 @@ Session records are stored in local app files. Favourites and preferences are st
 
 ### 3. Data Collection and Sharing
 
-EaseFlow v1.1:
+EaseFlow:
 
 - Does not include advertising, tracking, or third-party analytics SDKs.
 - Does not upload this local data to developer-operated servers through its training, favourites, records, widget, or reminder features.
@@ -108,7 +106,7 @@ You may contact us to request access to or deletion of information voluntarily p
 
 We may update this Privacy Policy as EaseFlow and its related services evolve.
 
-The latest version will be published on our website with its revision date and applicable app version.
+The updated policy will be published on our website with its revision date.
 
 ### 9. Contact
 
@@ -123,8 +121,6 @@ easeflowsupport@163.com
 # EaseFlow Terms of Use
 
 **Last Updated:** November 2026
-
-**Applies To:** {{release_note}}
 
 Welcome to EaseFlow. Please read these terms before using the app.
 
@@ -198,8 +194,6 @@ easeflowsupport@163.com
 If you have a question, encounter an issue, or want to share feedback, feel free to get in touch.
 
 **Email: easeflowsupport@163.com**
-
-**Version note:** {{release_note}}
 
 ### Frequently Asked Questions
 
