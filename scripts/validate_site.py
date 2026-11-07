@@ -79,9 +79,12 @@ def main():
     assert actual==expected, f'Unexpected/missing output: {actual ^ expected}'
     assert not any(p.is_symlink() for p in DIST.rglob('*'))
     release=json.loads((ROOT/'copy/release.json').read_text(encoding='utf-8'))
-    assert set(release)=={'current_app_store_version','next_version','next_version_released'}
-    assert all(re.fullmatch(r'v\d+\.\d+',release[k]) for k in ('current_app_store_version','next_version'))
-    assert release['current_app_store_version']!=release['next_version'] and isinstance(release['next_version_released'],bool)
+    assert set(release)=={'current_app_store_version','upcoming_version'}
+    assert re.fullmatch(r'v\d+\.\d+',release['current_app_store_version'])
+    assert release['upcoming_version'] is None or (
+        re.fullmatch(r'v\d+\.\d+',release['upcoming_version'])
+        and release['upcoming_version']!=release['current_app_store_version']
+    )
     docs={name:Document((DIST/name).read_text(encoding='utf-8')) for name in sorted(expected) if name.endswith('.html')}
     checked=0
     for lang,prefix in ROUTES.items():
@@ -119,7 +122,9 @@ def main():
                 for fragment in fragments:
                     assert compact(fragment) in text, f'Missing localized copy in {name}: {fragment}'
             if slug!='home':
-                assert release['next_version'] in text and (release['next_version_released'] or release['current_app_store_version'] in text), name
+                assert release['current_app_store_version'] in text, name
+                if release['upcoming_version'] is not None:
+                    assert release['upcoming_version'] in text, name
             if slug=='privacy': assert 'PanXinYue' in text,name
             assert f'mailto:{EMAIL}' in doc.links,name
             local_targets=set()

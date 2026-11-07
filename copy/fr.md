@@ -16,7 +16,7 @@ EaseFlow est une application d’étirements simple et douce. Des illustrations 
 <!-- privacy -->
 # Politique de confidentialité d’EaseFlow
 
-**Date de révision :** 31 octobre 2026
+**Date de révision :** novembre 2026
 
 **Versions concernées :** {{release_note}}
 
@@ -120,7 +120,7 @@ easeflowsupport@163.com
 <!-- terms -->
 # Conditions d’utilisation d’EaseFlow
 
-**Date de révision :** 31 octobre 2026
+**Date de révision :** novembre 2026
 
 **Versions concernées :** {{release_note}}
 

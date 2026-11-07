@@ -16,7 +16,7 @@ EaseFlow ist eine einfache App für sanftes Dehnen. Klare Übungsbilder, Schritt
 <!-- privacy -->
 # Datenschutzrichtlinie von EaseFlow
 
-**Überarbeitet am:** 31. Oktober 2026
+**Überarbeitet am:** November 2026
 
 **Geltende Versionen:** {{release_note}}
 
@@ -120,7 +120,7 @@ easeflowsupport@163.com
 <!-- terms -->
 # Nutzungsbedingungen von EaseFlow
 
-**Überarbeitet am:** 31. Oktober 2026
+**Überarbeitet am:** November 2026
 
 **Geltende Versionen:** {{release_note}}
 

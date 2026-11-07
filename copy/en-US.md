@@ -17,7 +17,7 @@ EaseFlow makes everyday stretching simple and approachable. Explore clear exerci
 <!-- privacy -->
 # EaseFlow Privacy Policy
 
-**Last Updated:** October 31, 2026
+**Last Updated:** November 2026
 
 **Applies To:** {{release_note}}
 
@@ -122,7 +122,7 @@ easeflowsupport@163.com
 <!-- terms -->
 # EaseFlow Terms of Use
 
-**Last Updated:** October 31, 2026
+**Last Updated:** November 2026
 
 **Applies To:** {{release_note}}
 

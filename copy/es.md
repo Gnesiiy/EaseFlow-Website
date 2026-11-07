@@ -16,7 +16,7 @@ EaseFlow es una app sencilla para estirarte con calma. Sus ilustraciones claras,
 <!-- privacy -->
 # Política de privacidad de EaseFlow
 
-**Fecha de revisión:** 31 de octubre de 2026
+**Fecha de revisión:** noviembre de 2026
 
 **Versiones aplicables:** {{release_note}}
 
@@ -120,7 +120,7 @@ easeflowsupport@163.com
 <!-- terms -->
 # Condiciones de uso de EaseFlow
 
-**Fecha de revisión:** 31 de octubre de 2026
+**Fecha de revisión:** noviembre de 2026
 
 **Versiones aplicables:** {{release_note}}
 

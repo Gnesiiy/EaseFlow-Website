@@ -37,15 +37,18 @@ UI = {
 RELEASE_NOTES = json.loads((ROOT / 'copy/release_notes.json').read_text(encoding='utf-8'))
 assert set(RELEASE_NOTES) == set(ROUTES) and all(len(value) == 4 for value in RELEASE_NOTES.values())
 RELEASE = json.loads((ROOT / 'copy/release.json').read_text(encoding='utf-8'))
-assert set(RELEASE) == {'current_app_store_version','next_version','next_version_released'}
-assert all(re.fullmatch(r'v\d+\.\d+', RELEASE[key]) for key in ('current_app_store_version','next_version'))
-assert RELEASE['current_app_store_version'] != RELEASE['next_version']
-assert isinstance(RELEASE['next_version_released'], bool)
+assert set(RELEASE) == {'current_app_store_version','upcoming_version'}
+assert re.fullmatch(r'v\d+\.\d+', RELEASE['current_app_store_version'])
+assert RELEASE['upcoming_version'] is None or (
+    re.fullmatch(r'v\d+\.\d+', RELEASE['upcoming_version'])
+    and RELEASE['upcoming_version'] != RELEASE['current_app_store_version']
+)
 
 def release_note(lang, slug):
     templates = RELEASE_NOTES[lang]
-    template = templates[3] if RELEASE['next_version_released'] else templates[{'privacy':0,'terms':1,'support':2}[slug]]
-    return template.format(current=RELEASE['current_app_store_version'], next=RELEASE['next_version'])
+    upcoming = RELEASE['upcoming_version']
+    template = templates[{'privacy':0,'terms':1,'support':2}[slug]] if upcoming else templates[3]
+    return template.format(current=RELEASE['current_app_store_version'], next=upcoming)
 
 def load_copy(lang):
     source = (ROOT / 'copy' / f'{lang}.md').read_text(encoding='utf-8')
