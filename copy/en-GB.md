@@ -35,13 +35,20 @@ EaseFlow does not require an account. The app stores and processes the following
 
 - Identifiers of exercises and routines you have saved as favourites;
 - Completed session records, including completion time, exercise or routine identifier, session mode, a snapshot of its title, and actual active duration;
+- Where available, training records also include a fixed local completion date, time zone, completed exercise identifiers and an approximate training location if location recording is enabled;
 - App language, appearance mode, default voice guidance, and daily stretch and scheduled activity reminder settings.
 
 Total session count, total active time, the 7-day or 30-day trends, and the training calendar are calculated from records on your device. Searches, filters, timers, and in-progress session state are also handled locally. The app does not offer account-based cloud sync or maintain a developer-hosted workout profile.
 
-Reminders are off by default. When you enable daily stretch or scheduled activity reminders, the app requests iOS notification permission and submits recurring local notifications at your chosen times. Activity reminders follow your selected interval and time window; they do not detect whether you have been sitting. iOS schedules and delivers the notifications, which may be affected by system settings.
+Qualifying days and body exploration progress for the 2026 Winter Challenge are calculated from local training records; unlocked rewards, body areas and achievements are stored separately on your device.
+
+Reminders are off by default. On first launch, the app requests iOS notification permission, followed by When In Use location permission. Allowing notifications does not turn on scheduled reminders. Only when you enable daily stretch or scheduled activity reminders does the app submit recurring local notifications to iOS for your chosen times. Activity reminders do not detect sitting. iOS schedules and delivers notifications, subject to system settings.
+
+If location permission is granted and you have not previously saved a choice to turn off training location recording, the app may enable that recording automatically. You can turn it off at any time. The app saves a completed session first, then makes one location attempt. It stores only country code, country or region, administrative area, and city. It does not persist latitude, longitude, or street addresses and does not continuously track location in the background.
 
 The small, medium, and large Home Screen widgets use routine information bundled with the app. You can choose a preferred routine in the widget configuration. Widgets show routine titles, durations, and exercise counts, and can open a routine or the routine list. They do not display workout history or read reminder settings. iOS manages the widget selection.
+
+The app and widget share only the Christmas theme unlock flag and theme selection through an App Group, not full training history.
 
 Session records are stored in local app files. Favourites and preferences are stored in app settings on the device. This local data may be included in device or system backups; whether and how it is backed up, transferred, or restored depends on your iOS and backup service settings. The app does not mark the session record files as excluded from backup, so we cannot guarantee that the data will never leave your device.
 
@@ -50,9 +57,13 @@ Session records are stored in local app files. Favourites and preferences are st
 EaseFlow:
 
 - Does not include advertising, tracking, or third-party analytics SDKs.
-- Does not upload this local data to developer-operated servers through its training, favourites, records, widget, or reminder features.
-- Does not access HealthKit records, location, microphone, camera, or contacts.
+- Does not upload personal training data to developer-operated servers through training, achievement, location, favourite, record, widget, or reminder features.
+- Does not access HealthKit records, microphone, camera, or contacts.
 - Does not sell personal information.
+
+Training location reverse geocoding uses Apple system services. This process may involve transmitting location data to Apple, subject to Apple's services and privacy practices.
+
+Share cards and commemorative cards are created locally as temporary PNG files. You choose whether to share or save an image through the iOS system share sheet; subsequent handling depends on the destination you choose. Deleting training history does not guarantee deletion of images already generated, saved, or shared.
 
 If future features require additional data processing, we will update this policy and provide any notices or choices required by applicable law.
 
@@ -92,7 +103,11 @@ Please avoid including unnecessary sensitive personal information in support mes
 
 In Me, you can remove an exercise or routine from favourites and change your app language, appearance, default voice guidance, and reminder preferences. You can also manage or disable EaseFlow's notification permission in iOS Settings.
 
+You can also turn off training location recording at any time and manage EaseFlow’s location permission in iOS Settings. Turning off recording does not automatically delete earlier locations.
+
 In Records, you can open the full session history and confirm deletion of individual records. After a successful deletion, the app recalculates totals, trends, and the calendar from the remaining records. There is currently no in-app action to delete all records at once.
+
+Deleting an individual training record also deletes its associated location. Winter Challenge progress is recalculated from remaining records, but previously saved reward unlock eligibility is not revoked. Deleting a record does not guarantee deletion of images previously generated, saved, or shared. Unlocked rewards, body areas and achievements remain stored on your device after the event ends.
 
 If saving the main session history file fails, the app attempts to write pending records to a local recovery file and retries later. Records may still be lost if that file cannot be written or the data is damaged. The app does not overwrite unreadable files and cannot guarantee automatic recovery. When deleting a record, the app also handles a matching entry in the recovery file. A storage error may prevent deletion and be shown in the app.
 
@@ -152,6 +167,8 @@ Some exercises require manual confirmation or step progression. The app does not
 Pay attention to how your body feels. Never force a movement simply because a timer has finished.
 
 Daily stretch and scheduled activity reminders are optional wellness prompts. They do not provide medical monitoring or detect prolonged sitting in real time. You can enable, adjust, or turn off reminders in Me → Reminders, and manage notification permission in iOS Settings. iOS system settings may affect when notifications arrive or whether they are delivered.
+
+For the 2026 Winter Challenge, sessions completed from 1–31 December are counted by their local completion date. At least 10 minutes of completed active training in total in one day counts as a qualifying day; rewards unlock at 2, 5, 8, 12 and 16 days. Two different basic movements light up each body area, without the daily 10-minute requirement. Progress is calculated from local records. Unlocked rewards, areas and achievements are stored on your device; deleting records recalculates progress but does not revoke saved unlocks.
 
 ### 4. Content and Intellectual Property
 

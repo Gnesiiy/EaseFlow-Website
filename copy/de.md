@@ -34,13 +34,20 @@ Für EaseFlow ist kein Konto erforderlich. Die App speichert und verarbeitet auf
 
 - Kennungen der Übungen und Routinen, die du als Favoriten markierst.
 - Aufzeichnungen abgeschlossener Trainingseinheiten mit Abschlusszeit, Übungs- oder Routinenkennung, Trainingsmodus, einer Momentaufnahme des Titels und tatsächlicher aktiver Dauer.
+- Soweit verfügbar, enthalten Trainingsaufzeichnungen auch das bei Abschluss festgehaltene lokale Datum, die Zeitzone, Kennungen abgeschlossener Übungen und bei aktivierter Ortsaufzeichnung einen ungefähren Trainingsort;
 - App-Sprache, Darstellung, Standardoption für Sprachanweisungen sowie Einstellungen für tägliche Dehn- und regelmäßige Bewegungserinnerungen.
 
 Die Gesamtzahl der Einheiten, die gesamte aktive Zeit, der Verlauf der letzten 7 oder 30 Tage und der Trainingskalender werden aus den Aufzeichnungen auf deinem Gerät berechnet. Suchen, Filter, Timer und der Status einer laufenden Einheit werden ebenfalls lokal verarbeitet. Es gibt weder eine kontobasierte Cloud-Synchronisierung noch ein vom Entwickler verwaltetes Trainingsprofil in der Cloud.
 
-Erinnerungen sind standardmäßig ausgeschaltet. Wenn du tägliche Dehn- oder regelmäßige Bewegungserinnerungen aktivierst, fragt die App nach der iOS-Mitteilungserlaubnis und übergibt iOS wiederkehrende lokale Mitteilungen für deine gewählten Zeiten. Bewegungserinnerungen folgen dem gewählten Intervall und Zeitfenster; sie erkennen nicht, ob du lange gesessen hast. iOS plant und stellt die Mitteilungen zu, wobei Systemeinstellungen Einfluss haben können.
+Gültige Tage und Körpererkundung der Winter‑Challenge 2026 werden aus lokalen Trainingsaufzeichnungen berechnet; freigeschaltete Belohnungen, Körperbereiche und Erfolge werden gesondert auf dem Gerät gespeichert.
+
+Erinnerungen sind standardmäßig ausgeschaltet. Beim ersten Start fordert die App nacheinander die iOS-Mitteilungserlaubnis und die Standortberechtigung „Beim Verwenden der App“ an. Die Erlaubnis für Mitteilungen schaltet geplante Erinnerungen nicht automatisch ein. Erst wenn du tägliche Dehn- oder regelmäßige Bewegungserinnerungen aktivierst, übergibt die App iOS wiederkehrende lokale Mitteilungen für die gewählten Zeiten. Bewegungserinnerungen erkennen nicht, ob du lange gesessen hast. iOS plant und stellt die Mitteilungen zu; Systemeinstellungen können dies beeinflussen.
+
+Wenn die Standortberechtigung erteilt wurde und du nicht zuvor das Ausschalten der Trainingsort-Aufzeichnung gespeichert hast, kann die App diese Aufzeichnung automatisch aktivieren. Du kannst sie jederzeit ausschalten. Zunächst wird eine abgeschlossene Einheit gespeichert, danach wird einmal versucht, den Standort zu bestimmen. Gespeichert werden nur Ländercode, Land oder Region, Verwaltungsgebiet und Stadt. Breiten- und Längengrade oder Straßenadressen werden nicht dauerhaft gespeichert; eine fortlaufende Standortverfolgung im Hintergrund findet nicht statt.
 
 Die kleinen, mittleren und großen Home-Bildschirm-Widgets verwenden Routineninformationen, die mit der App geliefert werden. In der Widget-Konfiguration kannst du eine bevorzugte Routine auswählen. Die Widgets zeigen Namen, Dauer und Anzahl der Übungen und können die Routine oder die Liste öffnen. Sie zeigen keinen Trainingsverlauf und lesen keine Erinnerungseinstellungen. iOS verwaltet die Widget-Auswahl.
+
+App und Widget teilen über eine App Group nur das Freischaltkennzeichen für das Weihnachtsthema und die Themenauswahl, nicht den vollständigen Trainingsverlauf.
 
 Trainingseinheiten werden in lokalen App-Dateien gespeichert, Favoriten und Einstellungen in den App-Einstellungen auf dem Gerät. Diese Daten können in Geräte- oder Systemsicherungen enthalten sein. Ob und wie sie gesichert, übertragen oder wiederhergestellt werden, hängt von deinen iOS- und Sicherungsdiensteinstellungen ab. Die App schließt die Dateien mit Trainingsaufzeichnungen nicht von Sicherungen aus; wir können daher nicht garantieren, dass die Daten das Gerät nie verlassen.
 
@@ -49,9 +56,13 @@ Trainingseinheiten werden in lokalen App-Dateien gespeichert, Favoriten und Eins
 EaseFlow:
 
 - Enthält keine Werbe-, Nutzertracking- oder Analyse-SDKs Dritter.
-- Lädt diese lokalen Daten über Trainings-, Favoriten-, Verlaufs-, Widget- oder Erinnerungsfunktionen nicht auf Server des Entwicklers hoch.
-- Greift nicht auf HealthKit-Daten, Standort, Mikrofon, Kamera oder Kontakte zu.
+- Lädt über Trainings-, Erfolgs-, Standort-, Favoriten-, Verlaufs-, Widget- oder Erinnerungsfunktionen keine persönlichen Trainingsdaten auf Server des Entwicklers hoch.
+- Greift nicht auf HealthKit-Daten, Mikrofon, Kamera oder Kontakte zu.
 - Verkauft keine personenbezogenen Daten.
+
+Die umgekehrte Geokodierung des Trainingsorts nutzt Systemdienste von Apple. Dabei können Standortdaten an Apple übertragen werden; hierfür gelten Apples Dienste und Datenschutzbestimmungen.
+
+Karten zum Teilen und Erinnerungskarten werden lokal als temporäre PNG-Dateien erzeugt. Ob du ein Bild über das iOS-Freigabemenü teilst oder speicherst, entscheidest du selbst. Die weitere Verarbeitung hängt vom gewählten Ziel ab. Das Löschen des Trainingsverlaufs garantiert nicht, dass bereits erzeugte, gespeicherte oder geteilte Bilder gelöscht werden.
 
 Falls künftige Funktionen eine weitere Datenverarbeitung erfordern, aktualisieren wir diese Richtlinie und stellen die nach geltenden Vorschriften erforderlichen Informationen und Wahlmöglichkeiten bereit.
 
@@ -91,7 +102,11 @@ Bitte sende keine unnötigen sensiblen personenbezogenen Informationen in Suppor
 
 Unter „Mein Bereich“ kannst du Übungen oder Routinen aus den Favoriten entfernen und Sprache, Darstellung, Standard-Sprachanweisungen und Erinnerungen ändern. In den iOS-Einstellungen kannst du die Mitteilungserlaubnis für EaseFlow verwalten oder deaktivieren.
 
+Du kannst die Aufzeichnung von Trainingsorten jederzeit ausschalten und die Standortberechtigung für EaseFlow in den iOS-Einstellungen verwalten. Das Ausschalten löscht bereits gespeicherte Orte nicht automatisch.
+
 Unter „Verlauf“ kannst du den gesamten Trainingsverlauf öffnen und einzelne Einträge nach Bestätigung löschen. Nach einer erfolgreichen Löschung berechnet die App Summen, Verlauf und Kalender aus den verbleibenden Einträgen neu. Derzeit gibt es in der App keine Funktion, alle Einträge auf einmal zu löschen.
+
+Beim Löschen einer einzelnen Trainingsaufzeichnung wird auch der zugehörige Ort gelöscht. Der Fortschritt der Winter‑Challenge wird aus den verbleibenden Aufzeichnungen neu berechnet; eine bereits gespeicherte Berechtigung für freigeschaltete Belohnungen bleibt bestehen. Das Löschen garantiert nicht die Entfernung früher erzeugter, gespeicherter oder geteilter Bilder. Freigeschaltete Belohnungen, Körperbereiche und Erfolge bleiben auch nach Ende der Aktion auf dem Gerät gespeichert.
 
 Scheitert das Speichern der Hauptdatei des Verlaufs, versucht die App, ausstehende Einträge in eine lokale Wiederherstellungsdatei zu schreiben und es später erneut zu versuchen. Wenn diese Datei nicht beschrieben werden kann oder Daten beschädigt sind, können Einträge dennoch verloren gehen. Die App überschreibt unlesbare Originaldateien nicht und garantiert keine automatische Wiederherstellung. Beim Löschen bearbeitet sie auch den entsprechenden Eintrag in der Wiederherstellungsdatei. Ein Schreib- oder Löschfehler kann einen Speicherhinweis auslösen und die Löschung verhindern.
 
@@ -150,6 +165,8 @@ Einige Übungen erfordern eine manuelle Bestätigung oder das Weiterschalten von
 Achte auf die Signale deines Körpers und erzwinge eine Bewegung nicht nur, weil der Timer abgelaufen ist.
 
 Tägliche Dehn- und regelmäßige Bewegungserinnerungen sind freiwillige Hinweise für gesunde Gewohnheiten. Sie bieten keine medizinische Überwachung und erkennen langes Sitzen nicht in Echtzeit. Unter „Mein Bereich“ → „Erinnerungen“ kannst du sie ein-, um- oder ausschalten und in den iOS-Einstellungen die Mitteilungserlaubnis verwalten. iOS-Einstellungen können den Zeitpunkt und die Zustellung beeinflussen.
+
+Für die Winter‑Challenge 2026 werden vom 1. bis 31. Dezember abgeschlossene Einheiten nach ihrem lokalen Abschlussdatum gezählt. Ein Tag mit insgesamt mindestens 10 Minuten abgeschlossenem aktivem Training gilt als gültiger Tag; Belohnungen werden nach 2, 5, 8, 12 und 16 Tagen freigeschaltet. Zwei verschiedene Grundübungen aktivieren jeweils einen Körperbereich, ohne tägliche Zehn-Minuten-Grenze. Der Fortschritt wird aus lokalen Aufzeichnungen berechnet. Freigeschaltete Belohnungen, Bereiche und Erfolge werden auf dem Gerät gespeichert; das Löschen von Einträgen berechnet den Fortschritt neu, nimmt gespeicherte Freischaltungen aber nicht zurück.
 
 ### 4. Inhalte und geistiges Eigentum
 

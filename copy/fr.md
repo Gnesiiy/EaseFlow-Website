@@ -34,13 +34,20 @@ EaseFlow ne nécessite pas de compte. L’application conserve et traite sur vot
 
 - Les identifiants des exercices et des routines ajoutés aux favoris.
 - Les séances terminées : heure de fin, identifiant de l’exercice ou de la routine, mode de séance, copie du titre au moment de la séance et durée d’activité réelle.
+- Lorsqu’elles sont disponibles, les séances enregistrent aussi la date locale de fin fixée au moment de l’entraînement, le fuseau horaire, les identifiants des exercices terminés et un lieu d’entraînement approximatif si son enregistrement est activé ;
 - La langue de l’application, l’apparence, le réglage par défaut du guidage vocal et les réglages des rappels d’étirement quotidien et d’activité programmée.
 
 Le nombre total de séances, le temps actif cumulé, les tendances des 7 ou 30 derniers jours et le calendrier sont calculés à partir des enregistrements présents sur l’appareil. Les recherches, les filtres, les minuteurs et l’état d’une séance en cours y sont aussi traités. L’application ne propose pas de synchronisation cloud liée à un compte et le développeur ne conserve pas de dossier d’entraînement dans le cloud.
 
-Les rappels sont désactivés par défaut. Si vous activez les rappels d’étirement quotidien ou d’activité programmée, l’application demande l’autorisation d’envoyer des notifications iOS et soumet à iOS des notifications locales récurrentes aux heures choisies. Les rappels d’activité suivent l’intervalle et la plage horaire sélectionnés ; ils ne détectent pas si vous êtes resté assis. iOS planifie et livre les notifications, éventuellement selon ses réglages.
+Les jours validés et l’exploration corporelle du Défi hivernal 2026 sont calculés à partir des séances locales ; les récompenses, zones et succès débloqués sont enregistrés séparément sur l’appareil.
+
+Les rappels sont désactivés par défaut. Au premier lancement, l’application demande d’abord l’autorisation d’envoyer des notifications iOS, puis l’accès à la localisation « Lorsque l’app est active ». Autoriser les notifications n’active pas automatiquement les rappels programmés. L’application ne transmet à iOS des notifications locales récurrentes aux heures choisies que si vous activez les rappels quotidiens d’étirement ou les rappels d’activité. Ceux-ci ne détectent pas si vous êtes resté assis. Leur programmation et leur distribution sont gérées par iOS et peuvent dépendre des réglages système.
+
+Si l’accès à la localisation est autorisé et que vous n’avez pas déjà enregistré le choix de désactiver l’enregistrement des lieux, l’application peut l’activer automatiquement. Vous pouvez le désactiver à tout moment. Une séance terminée est d’abord enregistrée, puis l’application tente une seule fois d’obtenir la localisation. Seuls le code pays, le pays ou la région, la subdivision administrative et la ville sont conservés. Les coordonnées et l’adresse postale ne sont pas enregistrées durablement ; aucun suivi continu en arrière-plan n’est effectué.
 
 Les widgets d’écran d’accueil petit, moyen et grand utilisent les données de routines fournies avec l’application. Vous pouvez choisir une routine préférée dans la configuration du widget. Ils affichent le nom, la durée et le nombre d’exercices et peuvent ouvrir la routine ou la liste. Ils n’affichent pas l’historique des séances et ne lisent pas les réglages des rappels. iOS gère le choix du widget.
+
+L’application et le widget ne partagent via un App Group que l’indicateur de déblocage du thème de Noël et le thème choisi, pas l’historique complet.
 
 Les séances sont conservées dans des fichiers locaux de l’application ; les favoris et préférences, dans les réglages de l’application sur l’appareil. Ces données peuvent figurer dans des sauvegardes de l’appareil ou du système. La sauvegarde, le transfert et la restauration éventuels dépendent des réglages iOS et du service de sauvegarde. L’application n’exclut pas les fichiers de séances des sauvegardes : nous ne pouvons donc pas garantir que ces données ne quitteront jamais l’appareil.
 
@@ -49,9 +56,13 @@ Les séances sont conservées dans des fichiers locaux de l’application ; les 
 EaseFlow :
 
 - N’intègre aucun SDK publicitaire, de suivi des utilisateurs ou d’analyse tiers.
-- N’envoie pas ces données locales aux serveurs du développeur via les fonctions de séances, favoris, suivi, widgets ou rappels.
-- N’accède pas aux données HealthKit, à la localisation, au microphone, à l’appareil photo ou aux contacts.
+- Ne téléverse pas de données personnelles d’entraînement vers les serveurs du développeur via les fonctions de séances, récompenses, localisation, favoris, historique, widgets ou rappels.
+- N’accède pas aux données HealthKit, au microphone, à l’appareil photo ni aux contacts.
 - Ne vend pas de données personnelles.
+
+Le géocodage inverse des lieux d’entraînement utilise les services système d’Apple. Ce traitement peut entraîner la transmission de données de localisation à Apple, selon ses services et pratiques de confidentialité.
+
+Les cartes à partager et les cartes commémoratives sont générées localement sous forme de PNG temporaires. Vous choisissez de partager ou d’enregistrer une image via la feuille de partage d’iOS ; son traitement ultérieur dépend de la destination choisie. La suppression de l’historique ne garantit pas celle des images déjà créées, enregistrées ou partagées.
 
 Si de futures fonctions exigent un traitement supplémentaire de données, nous mettrons à jour cette politique et fournirons les informations et choix requis par les règles applicables.
 
@@ -91,7 +102,11 @@ Vous pouvez demander raisonnablement la suppression des données personnelles co
 
 Dans « Moi », vous pouvez retirer des exercices ou des routines des favoris et modifier la langue, l’apparence, le guidage vocal par défaut et les rappels. Vous pouvez aussi gérer ou désactiver l’autorisation des notifications EaseFlow dans les réglages iOS.
 
+Vous pouvez aussi désactiver à tout moment l’enregistrement des lieux d’entraînement et gérer l’autorisation de localisation d’EaseFlow dans les réglages iOS. Désactiver cet enregistrement ne supprime pas automatiquement les anciens lieux.
+
 Dans « Suivi », vous pouvez ouvrir l’historique complet et confirmer la suppression de chaque séance séparément. Après une suppression réussie, l’application recalcule les totaux, les tendances et le calendrier à partir des séances restantes. Il n’existe actuellement aucune commande dans l’application pour supprimer toutes les séances à la fois.
+
+La suppression d’une séance entraîne celle du lieu qui lui est associé. La progression du défi hivernal est recalculée à partir des séances restantes, mais l’éligibilité aux récompenses déjà débloquées et enregistrée n’est pas retirée. Supprimer une séance ne garantit pas la suppression des images créées, enregistrées ou partagées auparavant. Les récompenses, zones du corps et succès débloqués restent enregistrés sur l’appareil après la fin de l’événement.
 
 Si l’enregistrement du fichier principal échoue, l’application essaie d’écrire les séances en attente dans un fichier local de récupération, puis réessaie plus tard. Des séances peuvent quand même être perdues si ce fichier ne peut être écrit ou si les données sont endommagées. L’application n’écrase pas un fichier illisible et ne garantit pas une récupération automatique. Lors de la suppression d’une séance, elle traite aussi l’entrée correspondante dans le fichier de récupération. Une erreur d’écriture ou de suppression peut afficher un avertissement de stockage et empêcher la suppression d’aboutir.
 
@@ -150,6 +165,8 @@ Certains exercices exigent de confirmer ou de faire avancer une étape manuellem
 Écoutez votre corps ; ne forcez pas un mouvement uniquement parce que le minuteur s’est terminé.
 
 Les rappels d’étirement quotidien et d’activité programmée sont des invitations facultatives à bouger. Ils n’assurent pas de suivi médical et ne détectent pas en temps réel une position assise prolongée. Vous pouvez les activer, régler ou désactiver dans « Moi » → « Rappels » et gérer l’autorisation des notifications dans les réglages iOS. Ces réglages peuvent influer sur l’heure et la livraison des notifications.
+
+Pour le Défi hivernal 2026, les séances terminées du 1er au 31 décembre sont comptées selon leur date locale de fin. Au moins 10 minutes d’entraînement actif terminé au total dans une journée constituent un jour validé ; les récompenses se débloquent après 2, 5, 8, 12 et 16 jours. Deux mouvements de base différents éclairent chaque zone du corps, sans condition quotidienne de 10 minutes. La progression est calculée à partir des séances locales. Les récompenses, zones et succès débloqués sont enregistrés sur l’appareil ; supprimer des séances recalcule la progression sans retirer les déblocages enregistrés.
 
 ### 4. Contenu et propriété intellectuelle
 

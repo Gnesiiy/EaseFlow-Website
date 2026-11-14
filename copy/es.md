@@ -34,13 +34,20 @@ EaseFlow no requiere una cuenta. La app guarda y trata en tu dispositivo:
 
 - Los identificadores de los ejercicios y las rutinas que marcas como favoritos.
 - Los registros de sesiones completadas: hora de finalización, identificador del ejercicio o la rutina, modo de sesión, copia del título en ese momento y tiempo de actividad real.
+- Cuando estén disponibles, los registros también incluyen la fecha local de finalización fijada en ese momento, la zona horaria, los identificadores de los ejercicios completados y un lugar de entrenamiento aproximado si está activado su registro;
 - El idioma de la app, la apariencia, la opción predeterminada de guía por voz y los ajustes de recordatorios diarios de estiramiento y de actividad programada.
 
 El número total de sesiones, el tiempo activo acumulado, las tendencias de los últimos 7 o 30 días y el calendario de entrenamiento se calculan a partir de los registros del dispositivo. Las búsquedas, filtros, temporizadores y el estado de una sesión en curso también se gestionan localmente. No hay sincronización en la nube mediante cuenta ni un historial de entrenamiento alojado por el desarrollador.
 
-Los recordatorios están desactivados por defecto. Si activas los recordatorios diarios de estiramiento o de actividad programada, la app solicita permiso para las notificaciones de iOS y registra notificaciones locales repetitivas a las horas elegidas. Los recordatorios de actividad siguen el intervalo y la franja horaria que selecciones; no detectan si llevas mucho tiempo sentado. iOS programa y entrega las notificaciones, que pueden verse afectadas por sus ajustes.
+Los días válidos y la exploración corporal del Desafío de invierno 2026 se calculan a partir de registros locales; los premios, las zonas y los logros desbloqueados se guardan por separado en el dispositivo.
+
+Los recordatorios están desactivados por defecto. En el primer inicio, la app solicita primero permiso para enviar notificaciones de iOS y después permiso de ubicación «Mientras se usa la app». Autorizar las notificaciones no activa automáticamente los recordatorios programados. Solo cuando activas los recordatorios diarios de estiramiento o de actividad programada, la app registra en iOS notificaciones locales repetidas a las horas elegidas. Los recordatorios de actividad no detectan si llevas tiempo sentado. iOS programa y entrega las notificaciones, sujeto a sus ajustes.
+
+Si concedes permiso de ubicación y no habías guardado antes la opción de desactivar el registro de lugares, la app puede activarlo automáticamente. Puedes desactivarlo en cualquier momento. Primero se guarda la sesión completa y después se intenta obtener la ubicación una vez. Solo se conservan el código de país, el país o región, la división administrativa y la ciudad. No se guardan de forma persistente las coordenadas ni la dirección postal, ni se realiza un seguimiento continuo de ubicación en segundo plano.
 
 Los widgets pequeños, medianos y grandes de la pantalla de inicio usan los datos de rutinas incluidos en la app. Puedes elegir una rutina preferida en la configuración del widget. Muestran el nombre, la duración y el número de ejercicios, y pueden abrir la rutina o su lista. No muestran el historial de sesiones ni leen los ajustes de recordatorios. iOS gestiona la selección del widget.
+
+La app y el widget solo comparten mediante un App Group el indicador de desbloqueo del tema navideño y el tema elegido, no el historial completo.
 
 Los registros de sesiones se guardan en archivos locales de la app; los favoritos y preferencias, en los ajustes de la app en el dispositivo. Estos datos pueden incluirse en copias de seguridad del dispositivo o del sistema. Que se copien, transfieran o restauren, y cómo, depende de los ajustes de iOS y del servicio de copias. La app no marca los archivos de registros para excluirlos de las copias de seguridad, por lo que no podemos garantizar que los datos nunca salgan del dispositivo.
 
@@ -49,9 +56,13 @@ Los registros de sesiones se guardan en archivos locales de la app; los favorito
 EaseFlow:
 
 - No incluye SDK de publicidad, seguimiento de usuarios ni análisis de terceros.
-- No sube estos datos locales a servidores del desarrollador mediante las funciones de entrenamiento, favoritos, registros, widgets o recordatorios.
-- No accede a datos de HealthKit, ubicación, micrófono, cámara ni contactos.
+- No sube datos personales de entrenamiento a servidores del desarrollador mediante las funciones de sesiones, logros, ubicación, favoritos, historial, widgets o recordatorios.
+- No accede a registros de HealthKit, micrófono, cámara ni contactos.
 - No vende información personal.
+
+La geocodificación inversa de los lugares de entrenamiento utiliza servicios del sistema de Apple. Este proceso puede implicar la transmisión de datos de ubicación a Apple, de acuerdo con sus servicios y prácticas de privacidad.
+
+Las tarjetas para compartir y las tarjetas conmemorativas se generan localmente como PNG temporales. Eres tú quien decide compartir o guardar una imagen mediante la hoja de compartir de iOS; el tratamiento posterior depende del destino elegido. Borrar el historial de sesiones no garantiza que se borren las imágenes ya generadas, guardadas o compartidas.
 
 Si en el futuro incorporamos funciones que requieran tratar más datos, actualizaremos esta política y ofreceremos la información y las opciones exigidas por la normativa aplicable.
 
@@ -91,7 +102,11 @@ Evita incluir datos personales sensibles que no sean necesarios en tus mensajes.
 
 En «Mi espacio» puedes quitar ejercicios o rutinas de favoritos y cambiar el idioma, la apariencia, la guía por voz predeterminada y los recordatorios. También puedes gestionar o desactivar el permiso de notificaciones de EaseFlow en los ajustes de iOS.
 
+También puedes desactivar el registro de lugares de entrenamiento en cualquier momento y gestionar el permiso de ubicación de EaseFlow en los ajustes de iOS. Desactivar el registro no borra automáticamente los lugares anteriores.
+
 En «Registro» puedes abrir el historial completo y confirmar la eliminación de registros individuales. Tras una eliminación correcta, la app recalcula los totales, las tendencias y el calendario con los registros restantes. Actualmente no hay una opción en la app para borrar todos los registros de una vez.
+
+Al borrar un registro de entrenamiento se borra también el lugar asociado. El progreso del desafío de invierno se recalcula a partir de los registros restantes, pero no se revoca el derecho a recompensas ya desbloqueado y guardado. Borrar un registro no garantiza que se eliminen las imágenes generadas, guardadas o compartidas anteriormente. Los premios, las zonas corporales y los logros desbloqueados permanecen guardados en el dispositivo después del evento.
 
 Si falla el guardado del archivo principal del historial, la app intenta escribir los registros pendientes en un archivo local de recuperación y volver a intentarlo después. Los registros pueden perderse si no se puede escribir ese archivo o los datos están dañados. La app no sobrescribe archivos ilegibles ni garantiza la recuperación automática. Al eliminar un registro, también trata la entrada correspondiente del archivo de recuperación. Un error de escritura o eliminación puede mostrar un aviso de almacenamiento e impedir que se complete el borrado.
 
@@ -150,6 +165,8 @@ Algunos ejercicios requieren confirmar o avanzar pasos manualmente. La app no re
 Presta atención a las señales de tu cuerpo; no fuerces un movimiento solo porque haya terminado el temporizador.
 
 Los recordatorios diarios de estiramiento y los de actividad programada son avisos opcionales de bienestar. No proporcionan supervisión médica ni detectan en tiempo real si llevas mucho tiempo sentado. Puedes activarlos, ajustarlos o desactivarlos en «Mi espacio» → «Recordatorios» y gestionar el permiso de notificaciones en los ajustes de iOS. Los ajustes de iOS pueden afectar a la hora y entrega de las notificaciones.
+
+En el Desafío de invierno 2026, las sesiones completadas del 1 al 31 de diciembre se cuentan según su fecha local de finalización. Al menos 10 minutos diarios en total de entrenamiento activo completado constituyen un día válido; los premios se desbloquean a los 2, 5, 8, 12 y 16 días. Cada zona corporal se ilumina al completar dos movimientos básicos distintos, sin exigir los 10 minutos diarios. El progreso se calcula a partir de registros locales. Los premios, las zonas y los logros desbloqueados se guardan en el dispositivo; borrar registros recalcula el progreso, pero no revoca los desbloqueos guardados.
 
 ### 4. Contenido y propiedad intelectual
 
